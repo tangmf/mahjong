@@ -1,3 +1,5 @@
+
+
 from tkinter import *
 from tkinter import ttk
 
@@ -146,14 +148,18 @@ def SaveRound():
     
     if(side==1):
         strSide = 'dong'
+        open('side.txt', mode='w', encoding='utf-8').write('东')
     elif(side==2):
         strSide = 'nan'
+        open('side.txt', mode='w', encoding='utf-8').write('南')
     elif(side==3):
         strSide = 'xi'
+        open('side.txt', mode='w', encoding='utf-8').write('西')
     elif(side==4):
         strSide = 'bei'
+        open('side.txt', mode='w', encoding='utf-8').write('北')
 
-    Write("side.txt", strSide)
+    #Write("side.txt", strSide)
     NewLine()
     Line()
     print("Round: " + str(strSide) + " / " + str(sideRound))
@@ -166,7 +172,6 @@ def SaveRound():
 
 
 # Player initialization
-
 p1 = Player(1, "Player1", 0)
 allList.append(p1)
 p2 = Player(2, "Player2", 0)
