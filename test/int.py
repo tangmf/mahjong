@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk
 
 allList = []
+side = 1
+sideRound = 1
 
 # Classes
 
@@ -97,6 +99,67 @@ def GetPlayer(playerIndex):
         if(p.index == playerIndex):
             return p
     return ''
+
+def NextRound():
+    global side
+    global sideRound
+    if(sideRound == 1):
+        sideRound = 4
+    else:
+        sideRound-=1
+        if(sideRound == 1):
+            if(side == 4):
+                side = 1
+            else:
+                side+=1
+
+    SaveRound()
+
+def PrevRound():
+    global side
+    global sideRound
+    if(sideRound == 4):
+        sideRound = 1
+    else:
+        sideRound+=1
+        if(sideRound == 2):
+            if(side == 1):
+                side = 4
+            else:
+                side-=1
+    SaveRound()
+
+def ResetRound():
+    global side
+    global sideRound
+    side = 1
+    sideRound = 1
+            
+
+    SaveRound()
+
+def SaveRound():
+
+    
+    Write("sideRound.txt", str(sideRound))
+    strSide = ''
+    
+    if(side==1):
+        strSide = 'dong'
+    elif(side==2):
+        strSide = 'nan'
+    elif(side==3):
+        strSide = 'xi'
+    elif(side==4):
+        strSide = 'bei'
+
+    Write("side.txt", strSide)
+    NewLine()
+    Line()
+    print("Round: " + str(strSide) + " / " + str(sideRound))
+    Line()
+
+    
     
 
     
@@ -140,6 +203,10 @@ ttk.Label(frm, text="Player1").grid(column=0, row=1)
 ttk.Button(frm, text="Shoot", command= lambda: Shoot(p1,v1.get())).grid(column=1, row=1)
 ttk.Button(frm, text="Zimo", command= lambda: Zimo(p1,v1.get())).grid(column=2, row=1)
 '''
+ttk.Button(frm, text="Prev", command= lambda : PrevRound()).grid(column=0, row=5)
+ttk.Button(frm, text="Reset", command= lambda : ResetRound()).grid(column=1, row=5)
+ttk.Button(frm, text="Next", command= lambda : NextRound()).grid(column=2, row=5)
+
 
 
 # Mainloop
